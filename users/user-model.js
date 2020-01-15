@@ -9,29 +9,23 @@ module.exports = {
 };
 
 function find() {
-  return db("user as u").select(
-    "u.userName",
-    "u.age",
-    "u.race",
-    "u.class",
-    "u.faction"
-  );
+  return db("users").select("id", "userName");
 }
 
 async function add(user) {
   user.password = await bcrypt.hash(user.password, 8);
-  const [id] = await db("user").insert(user);
+  const [id] = await db("users").insert(user);
   return findById(id);
 }
 
 function findById(id) {
-  return db("user")
+  return db("users")
     .where({ id })
     .first("id", "userName");
 }
 
 function findBy(filter) {
-  return db("user")
+  return db("users")
     .where(filter)
     .select("id", "userName", "password");
 }
