@@ -28,9 +28,9 @@ router.post("/login", async (req, res, next) => {
     const { userName, password } = req.body;
     const userInfo = await um.findBy({ userName }).first();
 
-    if (user) {
+    if (userInfo) {
       res.status(200).json({
-        Message: `Welcome ${userInfo.userName} to to our World of Warcraft Dating app!`
+        Message: `Welcome ${userInfo.userName} to to our World of Warcraft Tinder!`
       });
     } else {
       res.status(401).json({
