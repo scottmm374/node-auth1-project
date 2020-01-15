@@ -9,10 +9,17 @@ module.exports = {
 };
 
 function find() {
-  return db("user").select();
+  return db("user as u").select(
+    "u.userName",
+    "u.age",
+    "u.race",
+    "u.class",
+    "u.faction"
+  );
 }
 
 async function add(user) {
+  user.password = await bcrypt.hash(user.password, 8);
   const [id] = await db("user").insert(user);
   return findById(id);
 }
