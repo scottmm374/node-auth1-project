@@ -11,14 +11,13 @@ function restricted() {
   };
   return async (req, res, next) => {
     try {
-      const { password, userName } = req.body;
-      if (!password || !userName) {
-        console.log(userName, password);
-
+      const { password, username } = req.headers; // ! Will NOT work as req.headers returns userName as undefined Cannot have caps in header.
+      console.log("Req-body", username, password);
+      if (!password || !username) {
         return res.status(401).json({ message: "invalid credentials" });
       }
 
-      const user = await userMod.findBy({ userName }).first();
+      const user = await userMod.findBy({ username }).first();
       console.log("user", user);
       if (!user) {
         return res.status(401).json(hackerAlert);
