@@ -23,6 +23,9 @@ router.post("/login", async (req, res, next) => {
   try {
     const { userName, password } = req.body;
 
+    // can see username here
+    console.log("login", userName);
+
     const userInfo = await userMod.findBy({ userName }).first();
 
     const passwordValid = await bcrypt.compare(password, userInfo.password);
