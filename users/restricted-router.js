@@ -5,9 +5,8 @@ const restricted = require("../middleware/restricted");
 
 const router = express.Router();
 
-const hackerAlert = {
-  Message:
-    "Hello HACKER!, How many times you try that password? Good luck, you will never get in with our state of the art password securities! Bug off!"
+const unauth = {
+  Message: "You are not authorized"
 };
 
 router.post("/register", async (req, res, next) => {
@@ -36,10 +35,10 @@ router.post("/login", async (req, res, next) => {
       req.session.user = user;
 
       res.status(200).json({
-        Message: `Welcome ${user.username} to to our World of Warcraft Tinder!`
+        Message: `Welcome ${user.username} to Sessions and Cookies Lecture!`
       });
     } else {
-      res.status(401).json(hackerAlert);
+      res.status(401).json(unauth);
     }
   } catch (err) {
     next(err);

@@ -2,8 +2,7 @@ module.exports = () => {
   return (req, res, next) => {
     if (!req.session || !req.session.user) {
       return res.status(401).json({
-        Message:
-          "Hello HACKER!, How many times you try that password? Good luck, you will never get in with our state of the art password securities! Bug off!"
+        Message: "You are not Authorized"
       });
     }
     next();
