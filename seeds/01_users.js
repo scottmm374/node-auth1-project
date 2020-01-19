@@ -1,11 +1,11 @@
 exports.seed = async knex => {
   await knex("users").insert([
     {
-      userName: "Shabena",
+      username: "Shabena",
       password: "druidsSuck"
     },
     {
-      userName: "Astira",
+      username: "Astira",
       password: "NightElvesSuck"
     }
   ]);

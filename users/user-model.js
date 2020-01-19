@@ -9,7 +9,7 @@ module.exports = {
 };
 
 function find() {
-  return db("users").select("id", "userName");
+  return db("users").select("id", "username");
 }
 
 async function add(user) {
@@ -21,11 +21,11 @@ async function add(user) {
 function findById(id) {
   return db("users")
     .where({ id })
-    .first("id", "userName");
+    .first("id", "username");
 }
 
 function findBy(filter) {
   return db("users")
     .where(filter)
-    .select("id", "userName", "password");
+    .select("id", "username", "password");
 }

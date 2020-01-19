@@ -1,13 +1,28 @@
 const express = require("express");
-const userRouter = require("./users/user-router.js");
+const session = require("express-session");
+
+// const dbConfig = require("./data/db.config");
+// const userRouter = require("./users/user-router.js");
 const restrictedRouter = require("./users/restricted-router.js");
 
 const server = express();
 const port = process.env.PORT || 5000;
 
 server.use(express.json());
+server.use(
+  session({
+    resave: false,
+    saveUninitialized: false,
+    secret: "For the Horde",
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24 * 3,
+      secure: false
+    }
+  })
+);
 
-server.use("/api/user", userRouter);
+// server.use("/api/user", userRouter);
 server.use("/api/restricted", restrictedRouter);
 
 server.get("/", (req, res, next) => {
